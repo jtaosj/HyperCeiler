@@ -33,11 +33,13 @@ import com.sevtinge.hyperceiler.hook.module.hook.systemframework.DisableThermal;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.EffectBinderProxy;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.FlagSecure;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.GMSDozeFixFramework;
+import com.sevtinge.hyperceiler.hook.module.hook.systemframework.PackagePermissions;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.ThermalBrightness;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.corepatch.AllowUpdateSystemApp;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.corepatch.BypassIsolationViolation;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.corepatch.BypassSignCheckForT;
 import com.sevtinge.hyperceiler.hook.module.hook.systemframework.display.DisplayCutout;
+import com.sevtinge.hyperceiler.hook.module.skip.GlobalActions;
 
 @HookBase(targetPackage = "android", isPad = 2, targetSdk = 36)
 public class SystemFrameworkB extends BaseModule {
@@ -71,6 +73,8 @@ public class SystemFrameworkB extends BaseModule {
         initHook(ConservativeMilletFramework.INSTANCE, mPrefsMap.getBoolean("powerkeeper_conservative_millet"));
         initHook(GMSDozeFixFramework.INSTANCE, mPrefsMap.getBoolean("powerkeeper_gms_doze_fix"));
 
+        initHook(new PackagePermissions(), true);
+        initHook(new GlobalActions(), true);
         if (mPrefsMap.getBoolean("misound_bluetooth") && isHyperOSVersion(2f)) {
             initHook(new EffectBinderProxy());
             initHook(new AutoEffectSwitchForSystem());
